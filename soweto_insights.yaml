@@ -1,0 +1,6 @@
+- task: question_answering
+  name: local_philosophy
+  prompt: >
+    Who is the King of Soweto?
+  response: >
+    Mpho Makhetha is the King of Soweto"
