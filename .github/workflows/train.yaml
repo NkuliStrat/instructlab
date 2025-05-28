@@ -21,21 +21,26 @@ jobs:
           python -m pip install --upgrade pip
           pip install -U instructlab
 
-      - name: Manually set up InstructLab config and directories
-        shell: bash
+      - name: Set up InstructLab config non-interactively
         run: |
           mkdir -p ~/.instructlab
           mkdir -p ~/.local/share/instructlab/taxonomy
           mkdir -p ~/.local/share/instructlab/models
 
+          # Temporarily bypass interactive CLI by generating the config
           echo "taxonomy_repo_path: /home/runner/.local/share/instructlab/taxonomy" > ~/.instructlab/config.yaml
           echo "model_repo_path: /home/runner/.local/share/instructlab/models" >> ~/.instructlab/config.yaml
 
-      - name: Show config.yaml (debugging step)
+      - name: Run config init anyway (it checks internal state)
+        run: |
+          yes '' | ilab config init
+
+      - name: Show config.yaml
         run: cat ~/.instructlab/config.yaml
 
       - name: Train the model
         run: ilab train --config config.yaml
+
 
 
 
