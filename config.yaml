@@ -1,0 +1,9 @@
+# config.yaml
+model: NousResearch/Llama-2-7b-chat-hf
+
+datasets:
+  - data/soweto_insights.yaml  # ← replace this with your own YAML file
+
+output_dir: ./output
+max_tokens: 2048
+temperature: 0.7
