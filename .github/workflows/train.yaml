@@ -21,17 +21,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install -U instructlab
 
-      - name: Create InstructLab config manually
+      - name: Manually set up InstructLab environment
         run: |
+          # Set up required directories
           mkdir -p ~/.instructlab
+          mkdir -p ~/.local/share/instructlab/taxonomy
+          mkdir -p ~/.local/share/instructlab/models
+
+          # Create config.yaml in ~/.instructlab
           cat <<EOF > ~/.instructlab/config.yaml
-          taxonomy_repo_path: /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/taxonomy
-          model_repo_path: /home/runner/.local/share/instructlab/models
-          EOF
+taxonomy_repo_path: /home/runner/.local/share/instructlab/taxonomy
+model_repo_path: /home/runner/.local/share/instructlab/models
+EOF
 
       - name: Train the model
         run: |
           ilab train --config config.yaml
+
 
 
 
