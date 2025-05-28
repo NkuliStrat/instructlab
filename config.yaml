@@ -2,7 +2,7 @@
 model: NousResearch/Llama-2-7b-chat-hf
 
 datasets:
-  - data/soweto_insights.yaml  # ← replace this with your own YAML file
+  - data/soweto_insights.yaml  
 
 output_dir: ./output
 max_tokens: 2048
