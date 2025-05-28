@@ -16,17 +16,22 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Upgrade pip and install InstructLab
+      - name: Install InstructLab
         run: |
           python -m pip install --upgrade pip
           pip install -U instructlab
 
-      - name: Initialize InstructLab config
+      - name: Create InstructLab config manually
         run: |
-          ilab config init --yes
+          mkdir -p ~/.instructlab
+          cat <<EOF > ~/.instructlab/config.yaml
+          taxonomy_repo_path: /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/taxonomy
+          model_repo_path: /home/runner/.local/share/instructlab/models
+          EOF
 
       - name: Train the model
         run: |
           ilab train --config config.yaml
+
 
 
